@@ -1,0 +1,54 @@
+{
+	"heroes": [
+		{
+			"id": 1,
+			"name": "Первый герой",
+			"description": "Первый герой в рейтинге!",
+			"element": "fire"
+		},
+		{
+			"id": 2,
+			"name": "Второй герой",
+			"description": "Второй герой в рейтинге!",
+			"element": "water"
+		},
+		{
+			"id": "8c3a9f58-4368-4db4-8ba2-4bb2bea433ed",
+			"name": "Артем ",
+			"description": "Судов",
+			"element": "earth"
+		}
+	],
+	"filters": [
+		{
+			"id": "all",
+			"name": "all",
+			"label": "Все",
+			"className": "btn-outline-dark"
+		},
+		{
+			"id": "fire",
+			"name": "fire",
+			"label": "Огонь",
+			"className": "btn-danger"
+		},
+		{
+			"id": "water",
+			"name": "water",
+			"label": "Вода",
+			"className": "btn-primary"
+		},
+		{
+			"id": "wind",
+			"name": "wind",
+			"label": "Ветер",
+			"className": "btn-success"
+		},
+		{
+			"id": "earth",
+			"name": "earth",
+			"label": "Земля",
+			"className": "btn-secondary"
+		}
+	]
+}
