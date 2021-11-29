@@ -2,8 +2,8 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHttp } from '../../hooks/http.hook';
-import { heroCreated } from '../heroesList/heroesSlice';
 import { selectAll } from '../heroesFilters/filtersSlice';
+import { useCreateHeroMutation } from '../../api/apiSlice';
 import store from '../../store';
 // Задача для этого компонента:
 // Реализовать создание нового героя с введенными данными. Он должен попадать
@@ -20,12 +20,12 @@ const HeroesAddForm = () => {
 	const [description, setDescription] = useState('');
 	const [element, setElement] = useState('');
 
-	const dispatch = useDispatch();
-	const { request } = useHttp();
+	const [createHero, { isLoading, isError }] = useCreateHeroMutation();
+
 	const { filtersLoadingStatus } = useSelector(state => state.filters);
 	const filters = selectAll(store.getState());
 
-	console.log(filters);
+
 	const onCreate = (e) => {
 		e.preventDefault();
 
@@ -36,10 +36,7 @@ const HeroesAddForm = () => {
 			element
 		};
 
-		request(`http://localhost:3001/heroes`, "POST", JSON.stringify(hero))
-			.then(data => console.log(data, 'Created'))
-			.then(dispatch(heroCreated(hero)))
-			.catch(err => console.log(err));
+		createHero(hero).unwrap();
 
 		setName('');
 		setDescription('');
@@ -47,9 +44,9 @@ const HeroesAddForm = () => {
 	}
 
 	const renderFilters = (filters, status) => {
-		if (status === "loading") {
+		if (isLoading) {
 			return <option>Загрузка элементов</option>
-		} else if (status === "error") {
+		} else if (isError) {
 			return <option>Ошибка загрузки</option>
 		}
 
